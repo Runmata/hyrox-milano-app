@@ -1,0 +1,9 @@
+{
+  "name": "HYROX Plan - Pro Doubles",
+  "short_name": "HYROX Plan",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#101114",
+  "theme_color": "#101114",
+  "description": "Piano di allenamento HYROX Milano Pro Doubles Men"
+}

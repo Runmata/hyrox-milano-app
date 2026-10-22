@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101114">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HYROX Plan">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>HYROX Plan</title>
+<style>
+:root{--bg:#101114;--panel:#1a1c21;--panel2:#23262d;--text:#f6f7fb;--muted:#a6a9b3;--lime:#d5ff45;--line:#343740;--blue:#8bb8ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);letter-spacing:-.01em}
+button,input,textarea{font:inherit}button{cursor:pointer}.app{max-width:560px;margin:auto;min-height:100dvh;padding:18px 16px 100px}
+.top{display:flex;align-items:center;justify-content:space-between;margin:4px 0 22px}.brand{display:flex;gap:10px;align-items:center}.mark{width:42px;height:42px;background:var(--lime);color:#101114;border-radius:13px;display:grid;place-items:center;font-weight:950;font-size:17px}.eyebrow{font-size:11px;color:var(--muted);letter-spacing:.13em;font-weight:800}.brandname{font-size:18px;font-weight:900;letter-spacing:-.04em}.pill{border:1px solid #454851;border-radius:99px;padding:7px 10px;font-size:11px;color:var(--lime);font-weight:800}
+h1{font-size:34px;line-height:1.02;letter-spacing:-.055em;margin:8px 0 12px}h2{font-size:21px;letter-spacing:-.04em;margin:0 0 14px}h3{font-size:16px;margin:0 0 6px}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted);line-height:1.45}
+.hero{background:linear-gradient(135deg,#282d20,#1b1d20 62%);border:1px solid #454a37;border-radius:24px;padding:22px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:150px;height:150px;border:24px solid #d5ff4516;border-radius:50%;right:-48px;top:-35px}.hero>*{position:relative;z-index:1}.hero .tag{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.12em}.hero-bottom{display:flex;gap:12px;margin-top:22px}.metric{background:#ffffff0b;border:1px solid #ffffff12;border-radius:14px;padding:12px;flex:1}.metric b{display:block;font-size:22px}.metric span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.section{margin-top:25px}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.link{border:0;background:none;color:var(--lime);font-size:12px;font-weight:800}
+.weekstrip{display:flex;gap:7px;overflow-x:auto;padding-bottom:8px}.weekbtn{flex:0 0 auto;background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:12px;font-weight:800}.weekbtn.active{background:var(--lime);color:#111;border-color:var(--lime)}
+.daylist{display:grid;gap:9px}.day{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);padding:13px;border-radius:16px;color:var(--text);text-align:left;width:100%}.datebox{width:47px;min-width:47px;height:50px;background:var(--panel2);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center}.datebox b{font-size:17px}.datebox span{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:800}.daymain{flex:1;min-width:0}.daymain strong{display:block;font-size:14px;margin-bottom:4px}.daymain small{display:block;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.status{font-size:10px;border-radius:99px;padding:6px 8px;background:#2d3026;color:var(--lime);font-weight:800}.status.done{background:#26392d;color:#9ef0b0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:17px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.chip{font-size:11px;border:1px solid var(--line);background:var(--panel2);padding:7px 9px;border-radius:99px;color:#d8dbe4}.exercise{padding:13px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border:0}.exercise b{display:block;font-size:14px}.exercise span{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:4px}
+.primary{border:0;background:var(--lime);color:#101114;border-radius:13px;padding:14px 16px;font-weight:900;width:100%;margin-top:12px}.secondary{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:11px 13px;font-weight:700}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#15161aee;backdrop-filter:blur(20px);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;z-index:10}.navinner{width:min(560px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.nav button{background:transparent;border:0;color:var(--muted);padding:8px 5px;border-radius:12px;font-size:11px;font-weight:800}.nav button.active{background:var(--panel2);color:var(--lime)}.nav .ico{display:block;font-size:18px;margin-bottom:4px}
+.field{display:grid;gap:7px;margin:12px 0}.field label{font-size:12px;color:var(--muted);font-weight:800}.field input,.field textarea,.field select{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text)}.field textarea{min-height:100px;resize:vertical}
+.moodrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mood{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:12px 5px;font-size:12px}.mood.active{border-color:var(--lime);color:var(--lime)}
+.hidden{display:none!important}.toast{font-size:12px;color:var(--lime);margin-top:9px;min-height:16px}
+@media(min-width:500px){.app{padding-top:26px}.hero{padding:27px}h1{font-size:40px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><div class="mark">HX</div><div><div class="eyebrow">TRAINING SYSTEM</div><div class="brandname">HYROX PLAN</div></div></div>
+ <div class="pill">PRO DOUBLES</div>
+</header>
+<main id="homeView">
+ <section class="hero">
+  <div class="tag">NEXT TARGET · 06 DEC 2026</div>
+  <h1>Earn your<br>sub-70.</h1>
+  <div class="muted">Milano · Pro Doubles Men</div>
+  <div class="hero-bottom"><div class="metric"><b id="countdown">45</b><span>giorni alla gara</span></div><div class="metric"><b>70:00</b><span>obiettivo</span></div><div class="metric"><b>6</b><span>settimane</span></div></div>
+ </section>
+ <section class="section">
+  <div class="sectionhead"><h2>Il tuo piano</h2><button class="link" onclick="showView('calendar')">Tutto il calendario ↗</button></div>
+  <div class="small" style="margin-bottom:12px">24 ottobre – 6 dicembre · Il CrossFit conta già nel carico.</div>
+  <div class="weekstrip" id="weekStrip"></div>
+  <div class="daylist" id="dayList"></div>
+ </section>
+ <section class="section">
+  <div class="sectionhead"><h2>Check-in rapido</h2><span class="small">prima del WOD</span></div>
+  <div class="card">
+   <div class="small" style="margin-bottom:12px">Come senti le gambe oggi?</div>
+   <div class="moodrow"><button class="mood" data-mood="green" onclick="setMood(this)">🟢 Fresche</button><button class="mood" data-mood="yellow" onclick="setMood(this)">🟡 Pesanti</button><button class="mood" data-mood="red" onclick="setMood(this)">🔴 Affaticate</button></div>
+   <div class="toast" id="moodMsg"></div>
+  </div>
+ </section>
+</main>
+<main id="calendarView" class="hidden">
+ <h1>Calendario<br>allenamenti.</h1><p class="muted">Seleziona una settimana e apri la scheda del giorno.</p>
+ <div class="weekstrip" id="weekStrip2"></div><div class="daylist" id="dayList2"></div>
+</main>
+<main id="detailView" class="hidden">
+ <button class="link" onclick="showView('calendar')" style="padding:0;margin:4px 0 18px">← Torna al calendario</button>
+ <div class="eyebrow" id="detailDate"></div><h1 id="detailTitle">HYROX Session</h1>
+ <div class="chips"><span class="chip" id="detailDuration"></span><span class="chip">RPE controllato</span><span class="chip">Adatta al WOD</span></div>
+ <div class="card"><h3>Sessione del giorno</h3><div id="detailExercises"></div><button class="primary" id="completeBtn" onclick="toggleComplete()">✓ Segna completato</button><div class="toast" id="completeMsg"></div></div>
+ <section class="section card"><h3>Regola di carico</h3><p class="small">Se il WOD include già corsa intensa o stazioni pesanti, sostituisci la parte equivalente del piano. Se hai gambe pesanti, riduci il volume del 30–50% o scegli recupero.</p></section>
+</main>
+<main id="wodView" class="hidden">
+ <h1>Adatta i WOD.</h1><p class="muted">La domenica inserisci i workout pubblicati dal box. Puoi incollare più giorni insieme.</p>
+ <div class="card">
+  <div class="field"><label>SETTIMANA DAL</label><input id="wodDate" type="date" value="2026-10-24"></div>
+  <div class="field"><label>WOD DEL BOX</label><textarea id="wodText" placeholder="Lunedì: squat 5x5 + metcon...&#10;Martedì: corsa / row...&#10;Mercoledì: ..."></textarea></div>
+  <div class="field"><label>NOTE SU RECUPERO E GAMBE</label><select id="recovery"><option>Normale</option><option>Gambe pesanti</option><option>Stanchezza alta</option><option>Dolore o fastidio</option></select></div>
+  <button class="primary" onclick="saveWod()">Salva WOD e note</button><div class="toast" id="wodMsg"></div>
+ </div>
+ <section class="section card"><h3>Da ricordare</h3><p class="small">Questa demo salva le note sul dispositivo/browser in uso. Per un piano rimodulato, puoi copiare i WOD e incollarli nella chat con ChatGPT, oppure usare il pulsante qui sotto.</p><button class="secondary" style="width:100%" onclick="copyWod()">Copia testo WOD</button><button class="secondary" style="width:100%;margin-top:8px" onclick="downloadData()">Esporta dati JSON</button></section>
+</main>
+</div>
+<nav class="nav"><div class="navinner">
+<button class="active" data-view="home" onclick="showView('home')"><span class="ico">⌂</span>Home</button>
+<button data-view="calendar" onclick="showView('calendar')"><span class="ico">▦</span>Calendario</button>
+<button data-view="wod" onclick="showView('wod')"><span class="ico">↻</span>WOD & note</button>
+</div></nav>
+<script>
+const weeks=[
+{label:"24–30 OTT",days:[
+["Sab 24","HYROX specifico","60–70 min",["Riscaldamento 12 min.","3 × 1 km a 4:35–4:45/km, recupero 2 min jogging.","SkiErg 3 × 400 m, recupero 60–90 s.","Wall balls 3 × 15 con 9 kg.","Defaticamento 8 min."]],
+["Dom 25","Recupero","Riposo",["Riposo completo o passeggiata."]],
+["Lun 26","CrossFit / forza","45–60 min",["Forza tecnica o parte superiore.","Evita squat/deadlift pesanti se il sabato è stato impegnativo."]],
+["Mar 27","Corsa soglia","40–50 min",["Riscaldamento 12 min.","3 × 6 min a 4:45–4:55/km, recupero 2 min facili.","Defaticamento 8 min."]],
+["Mer 28","Tecnica stazioni","45–60 min",["Se non inclusi nel WOD: sled push 3 × 12,5 m + sled pull 3 × 12,5 m.","Carico controllato, recupero 2 min."]],
+["Gio 29","Corsa facile","35 min",["35 min a ritmo conversazionale, indicativamente 5:20–6:00/km se facile.","Se hai gambe pesanti, riposo."]],
+["Ven 30","Riposo / WOD leggero","20–40 min",["Mobilità o tecnica, RPE massimo 5/10.","Niente metcon massimale."]]},
+},
+{label:"31 OTT–6 NOV",days:[
+["Sab 31","Circuito HYROX","60–75 min",["4 giri: 1 km corsa + SkiErg 400 m + 10 burpee broad jumps.","Recupero 2 min tra i giri.","Wall balls 3 × 15, solo se il volume resta gestibile."]],
+["Dom 1","Recupero","Riposo",["Riposo completo."]],
+["Lun 2","CrossFit / forza","45–60 min",["Parte superiore o tecnica.","Niente gambe a cedimento."]],
+["Mar 3","Intervalli","45–55 min",["Riscaldamento 12 min.","4 × 1 km a 4:25–4:40/km, recupero 2 min jogging.","Defaticamento 10 min."]],
+["Mer 4","Forza stazioni","45–60 min",["Se non nel WOD: farmer carry 3 × 50 m con 2 × 32 kg.","Affondi 2 × 20 m con 30 kg; wall balls 2 × 20 con 9 kg."]],
+["Gio 5","Corsa facile","35–40 min",["Ritmo conversazionale oppure riposo se il recupero è scarso."]],
+["Ven 6","Scarico","20–40 min",["CrossFit tecnico leggero o riposo."]]},
+},
+{label:"7–13 NOV",days:[
+["Sab 7","Simulazione parziale","60–75 min",["4 blocchi con 1 km corsa ciascuno.","Stazioni in sequenza: SkiErg 500 m, sled push 25–50 m, sled pull 25–50 m, burpee broad jumps 20–40 m.","Corsa controllata 4:40–4:55/km."]],
+["Dom 8","Recupero","Riposo",["Riposo completo."]],
+["Lun 9","CrossFit tecnico","45–60 min",["Parte superiore, mobilità o tecnica."]],
+["Mar 10","Intervalli","45–55 min",["4 × 1 km a 4:25–4:35/km, recupero 2 min.","Se il WOD è già intenso, fai solo corsa facile."]],
+["Mer 11","Tecnica stazioni","45–60 min",["Richiamo tecnico solo su stazioni non già incluse nel WOD.","Volume accessorio massimo 20 min."]],
+["Gio 12","Corsa facile","35–45 min",["Corsa conversazionale, solo se recuperato."]],
+["Ven 13","Riposo","Riposo",["Mobilità leggera o riposo completo."]]},
+},
+{label:"14–20 NOV",days:[
+["Sab 14","Simulazione 5 km","65–80 min",["5 blocchi da 1 km corsa.","Dopo ogni km: SkiErg 500 m, sled push 50 m, sled pull 50 m, burpee broad jumps 40 m, row 500 m.","Registrate tempi e transizioni; non andare a cedimento."]],
+["Dom 15","Recupero","Riposo",["Riposo completo."]],
+["Lun 16","CrossFit leggero","40–55 min",["Parte superiore o tecnica, RPE 5–6/10."]],
+["Mar 17","Intervalli","45–55 min",["4 × 1 km a 4:25–4:40/km.","Se il WOD è intenso, sostituisci con 30 min facili."]],
+["Mer 18","Tecnica stazioni","40–55 min",["Se non già nel WOD: wall balls 3 × 20, farmer carry 3 × 40–50 m, affondi 2 × 20 m."]],
+["Gio 19","Corsa facile","35 min",["Ritmo conversazionale o riposo."]],
+["Ven 20","Riposo","Riposo",["Mobilità o riposo completo."]]},
+},
+{label:"21–27 NOV",days:[
+["Sab 21","Simulazione estesa","70–85 min",["6 blocchi da 1 km corsa a 4:40–5:00/km.","Stazioni: SkiErg 500 m, sled push 50 m, sled pull 50 m, burpee broad jumps 40 m, row 500 m, farmer carry 100 m.","È una simulazione parziale: ritmo sostenibile, niente cedimento."]],
+["Dom 22","Recupero","Riposo",["Riposo completo."]],
+["Lun 23","CrossFit moderato","40–55 min",["Parte superiore o tecnica."]],
+["Mar 24","Ultima qualità","40–50 min",["3 × 1 km a 4:25–4:35/km, recupero 2 min.","Niente ripetizioni aggiuntive."]],
+["Mer 25","Tecnica leggera","30–45 min",["Niente gambe a cedimento o volume elevato."]],
+["Gio 26","Corsa facile","30–40 min",["30–40 min facili se le gambe sono fresche."]],
+["Ven 27","Riposo","Riposo",["Mobilità facoltativa."]]},
+},
+{label:"28 NOV–4 DIC",days:[
+["Sab 28","Richiamo HYROX","45–55 min",["3 × 800 m a 4:35–4:45/km, recupero 2 min.","Sled push e pull 2 × 12,5 m ciascuno a carico gestibile.","Wall balls 2 × 15. Finisci con margine."]],
+["Dom 29","Recupero","Riposo",["Riposo completo."]],
+["Lun 30","Corsa facile","25–35 min",["25–35 min facili oppure riposo."]],
+["Mar 1","Attivazione corsa","25–35 min",["3 × 500 m brillanti ma rilassati, recupero completo."]],
+["Mer 2","Mobilità","15–25 min",["Attivazione leggera. Niente WOD duro."]],
+["Gio 3","Corsa pre-gara","25–30 min",["20–25 min facili + 3 accelerazioni brevi."]],
+["Ven 4","Riposo","Riposo",["Sonno e idratazione. Nessun WOD impegnativo."]]},
+},
+{label:"5–6 DIC",days:[
+["Sab 5","Attivazione facoltativa","15 min",["10–15 min facili e mobilità, oppure riposo completo."]],
+["Dom 6","GARA · HYROX MILANO","GARA",["Pro Doubles Men.","Riscaldamento progressivo, partenza controllata e divisioni concordate."]]}
+]}
+];
+let selectedWeek=0, selectedDay=0, currentSession=null;
+const completed=JSON.parse(localStorage.getItem('hyroxCompleted')||'{}');
+function renderWeeks(){
+ ['weekStrip','weekStrip2'].forEach(id=>{const el=document.getElementById(id);el.innerHTML='';weeks.forEach((w,i)=>{const b=document.createElement('button');b.className='weekbtn '+(i===selectedWeek?'active':'');b.textContent=w.label;b.onclick=()=>{selectedWeek=i;renderAll()};el.appendChild(b)})});
+}
+function makeDayCard(day,widx,didx){
+ const b=document.createElement('button');b.className='day';
+ const parts=day[0].split(' ');const num=parts[1]||'';
+ const key=widx+'-'+didx;
+ b.innerHTML=`<div class="datebox"><b>${num}</b><span>${parts[0]}</span></div><div class="daymain"><strong>${day[1]}</strong><small>${day[2]} · ${day[3][0]}</small></div><span class="status ${completed[key]?'done':''}">${completed[key]?'FATTO':'APRI'}</span>`;
+ b.onclick=()=>openDetail(widx,didx);return b;
+}
+function renderDays(){
+ ['dayList','dayList2'].forEach(id=>{const el=document.getElementById(id);el.innerHTML='';weeks[selectedWeek].days.forEach((d,i)=>el.appendChild(makeDayCard(d,selectedWeek,i)))});
+}
+function renderAll(){renderWeeks();renderDays()}
+function showView(v){
+ ['home','calendar','detail','wod'].forEach(n=>document.getElementById(n+'View').classList.toggle('hidden',n!==v));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+ if(v==='calendar')renderDays();window.scrollTo({top:0,behavior:'smooth'});
+}
+function openDetail(w,d){
+ currentSession={w,d};const x=weeks[w].days[d];document.getElementById('detailDate').textContent=x[0]+' · SETTIMANA '+(w+1);
+ document.getElementById('detailTitle').textContent=x[1];document.getElementById('detailDuration').textContent=x[2];
+ document.getElementById('detailExercises').innerHTML=x[3].map((t,i)=>`<div class="exercise"><b>${String(i+1).padStart(2,'0')} / Sessione</b><span>${t}</span></div>`).join('');
+ const key=w+'-'+d;document.getElementById('completeBtn').textContent=completed[key]?'✓ Completato — annulla':'✓ Segna completato';document.getElementById('completeMsg').textContent='';
+ showView('detail');
+}
+function toggleComplete(){if(!currentSession)return;const k=currentSession.w+'-'+currentSession.d;completed[k]=!completed[k];localStorage.setItem('hyroxCompleted',JSON.stringify(completed));document.getElementById('completeBtn').textContent=completed[k]?'✓ Completato — annulla':'✓ Segna completato';document.getElementById('completeMsg').textContent=completed[k]?'Sessione registrata su questo dispositivo.':'Completamento annullato.';renderDays()}
+function setMood(btn){document.querySelectorAll('.mood').forEach(x=>x.classList.remove('active'));btn.classList.add('active');const m=btn.dataset.mood;const msg={green:'Vai con la seduta prevista, senza cercare extra.',yellow:'Riduci il volume del 30–50% o fai corsa facile.',red:'Salta l’intensità: recupera e valuta eventuali sintomi persistenti.'};document.getElementById('moodMsg').textContent=msg[m];localStorage.setItem('hyroxMood',m)}
+function saveWod(){const data={date:document.getElementById('wodDate').value,text:document.getElementById('wodText').value,recovery:document.getElementById('recovery').value,savedAt:new Date().toISOString()};localStorage.setItem('hyroxWod',JSON.stringify(data));document.getElementById('wodMsg').textContent='WOD e note salvati su questo dispositivo.'}
+function copyWod(){const x=JSON.parse(localStorage.getItem('hyroxWod')||'{}');const s='Settimana dal: '+(x.date||'non indicata')+'\nRecupero: '+(x.recovery||'non indicato')+'\nWOD:\n'+(x.text||'Nessun WOD inserito');if(navigator.clipboard){navigator.clipboard.writeText(s).then(()=>document.getElementById('wodMsg').textContent='Testo copiato.').catch(()=>prompt('Copia il testo:',s))}else prompt('Copia il testo:',s)}
+function downloadData(){const data={completed,mood:localStorage.getItem('hyroxMood'),wod:JSON.parse(localStorage.getItem('hyroxWod')||'{}')};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='hyrox-progress.json';a.click();URL.revokeObjectURL(a.href)}
+const now=new Date();const race=new Date('2026-12-06T00:00:00');document.getElementById('countdown').textContent=Math.max(0,Math.ceil((race-now)/(1000*60*60*24)));
+const savedWod=JSON.parse(localStorage.getItem('hyroxWod')||'{}');if(savedWod.text){document.getElementById('wodText').value=savedWod.text;document.getElementById('wodDate').value=savedWod.date||'2026-10-24';document.getElementById('recovery').value=savedWod.recovery||'Normale'}
+renderAll();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
